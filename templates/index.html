@@ -3,17 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <title>Para nós ❤️</title>
+    <style>
+        body {
+            text-align: center;
+            font-family: Arial, sans-serif;
+            background-color: #fff0f5;
+            padding: 20px;
+        }
+        img {
+            width: 300px;
+            border-radius: 12px;
+            margin-top: 20px;
+        }
+        audio {
+            margin-top: 20px;
+        }
+    </style>
 </head>
 <body>
     <h1>Bem-vinda, meu amor ❤️</h1>
 
-    <!-- Música -->
-    <audio autoplay loop>
-  <source src="{{ url_for('static', filename='music/tema.mp3') }}" type="audio/mpeg">
-  Seu navegador não suporta áudio.
-</audio>
-
     <!-- Imagem -->
-    <a href="{{ url_for('static', filename='img/nossa_foto.jpg') }}">nossa foto</a>
+    <img src="{{ url_for('static', filename='img/nossa_foto.jpg') }}" alt="Nossa foto">
+
+    <!-- Música -->
+    <audio controls autoplay loop>
+        <source src="{{ url_for('static', filename='music/nossa_musica.mp3') }}" type="audio/mpeg">
+        Seu navegador não suporta o elemento de áudio.
+    </audio>
 </body>
 </html>
