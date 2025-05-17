@@ -1,11 +1,58 @@
 body {
-    background-color: #fff0f5;
+    background: linear-gradient(135deg, #ffe6f0, #ffeaf6); /* degrade romântico */
     font-family: 'Arial', sans-serif;
     text-align: center;
     padding: 30px;
 }
 
 h1 {
-    color: #cc3366;
+    color: #d63384;
+    font-family: 'Segoe Script', cursive; /* parece letra de carta */
     font-size: 36px;
+    text-shadow: 1px 1px 3px #fff; /* brilho leve */
+}
+
+img {
+    width: 300px;
+    border-radius: 12px;
+    margin-top: 20px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+p {
+    font-size: 18px;
+    color: #333;
+    margin-top: 20px;
+}
+
+.frases-amor {
+    position: absolute;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: 10;
+}
+
+.frase {
+    position: absolute;
+    color: #ff69b4;
+    font-size: 20px;
+    animation: flutuar 10s linear infinite;
+    font-family: 'Segoe Script', cursive;
+}
+
+@keyframes flutuar {
+    0% {
+        transform: translateY(100vh) rotate(0deg);
+        opacity: 0;
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-100vh) rotate(360deg);
+        opacity: 0;
+    }
 }
