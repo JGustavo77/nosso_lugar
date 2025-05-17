@@ -3,24 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <title>Para nós ❤️</title>
-    <style>
-        body {
-            text-align: center;
-            font-family: Arial, sans-serif;
-            background-color: #fff0f5;
-            padding: 20px;
-        }
-        img {
-            width: 300px;
-            border-radius: 12px;
-            margin-top: 20px;
-        }
-        audio {
-            margin-top: 20px;
-        }
-    </style>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/estilo.css') }}">
 </head>
 <body>
+
+    <!-- Frases Flutuantes -->
+    <div class="frases-amor">
+        <span class="frase">eu te amo</span>
+        <span class="frase">meu amor</span>
+        <span class="frase">pra sempre</span>
+    </div>
+
     <h1>Bem-vinda, meu amor ❤️</h1>
 
     <!-- Imagem -->
@@ -31,5 +24,18 @@
         <source src="{{ url_for('static', filename='music/tema.mp3') }}" type="audio/mpeg">
         Seu navegador não suporta o elemento de áudio.
     </audio>
+
+    <!-- Script das Frases Animadas -->
+    <script>
+        const frases = document.querySelectorAll('.frase');
+
+        frases.forEach(frase => {
+            frase.style.left = Math.random() * 100 + "vw";
+            frase.style.top = Math.random() * 100 + "vh";
+            frase.style.animationDuration = (5 + Math.random() * 5) + "s";
+            frase.style.fontSize = (16 + Math.random() * 20) + "px";
+        });
+    </script>
+
 </body>
 </html>
