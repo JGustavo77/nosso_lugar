@@ -1,58 +1,46 @@
-body {
-    background: linear-gradient(135deg, #ffe6f0, #ffeaf6); /* degrade romântico */
-    font-family: 'Arial', sans-serif;
-    text-align: center;
-    padding: 30px;
-}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Para nós ❤️</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/estilo.css') }}">
+</head>
+<body>
 
-h1 {
-    color: #d63384;
-    font-family: 'Segoe Script', cursive; /* parece letra de carta */
-    font-size: 36px;
-    text-shadow: 1px 1px 3px #fff; /* brilho leve */
-}
+    <!-- Frases Flutuantes -->
+    <div class="frases-amor">
+        <span class="frase">eu te amo</span>
+        <span class="frase">meu amor</span>
+        <span class="frase">para sempre</span>
+        <span class="frase">minha vida</span>
+        <span class="frase">juntos sempre</span>
+        <span class="frase">minha princesa</span>
+        <span class="frase">meu amor</span>
+        <span class="frase">para sempre</span>
+    </div>
 
-img {
-    width: 300px;
-    border-radius: 12px;
-    margin-top: 20px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-}
-p {
-    font-size: 18px;
-    color: #333;
-    margin-top: 20px;
-}
+    <h1>Bem-vinda, meu amor ❤️</h1>
 
-.frases-amor {
-    position: absolute;
-    top: 0;
-    left: 0;
-    pointer-events: none;
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-    z-index: 10;
-}
+    <!-- Imagem -->
+    <img src="{{ url_for('static', filename='img/nossa_foto.jpg') }}" alt="Nossa foto">
 
-.frase {
-    position: absolute;
-    color: #ff69b4;
-    font-size: 20px;
-    animation: flutuar 10s linear infinite;
-    font-family: 'Segoe Script', cursive;
-}
+    <!-- Música -->
+    <audio controls autoplay loop>
+        <source src="{{ url_for('static', filename='music/tema.mp3') }}" type="audio/mpeg">
+        Seu navegador não suporta o elemento de áudio.
+    </audio>
 
-@keyframes flutuar {
-    0% {
-        transform: translateY(100vh) rotate(0deg);
-        opacity: 0;
-    }
-    50% {
-        opacity: 1;
-    }
-    100% {
-        transform: translateY(-100vh) rotate(360deg);
-        opacity: 0;
-    }
-}
+    <!-- Script das Frases Animadas -->
+    <script>
+        const frases = document.querySelectorAll('.frase');
+
+        frases.forEach(frase => {
+            frase.style.left = Math.random() * 100 + "vw";
+            frase.style.top = Math.random() * 100 + "vh";
+            frase.style.animationDuration = (5 + Math.random() * 5) + "s";
+            frase.style.fontSize = (16 + Math.random() * 20) + "px";
+        });
+    </script>
+
+</body>
+</html>
