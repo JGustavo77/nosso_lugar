@@ -15,8 +15,6 @@
         <span class="frase">minha vida</span>
         <span class="frase">juntos sempre</span>
         <span class="frase">minha princesa</span>
-        <span class="frase">meu amor</span>
-        <span class="frase">para sempre</span>
         <span class="frase">você é minha</span>
         <span class="frase">nosso destino</span>
         <span class="frase">você é o meu sonho</span>
@@ -24,8 +22,7 @@
         <span class="frase">amor da minha vida</span>
         <span class="frase">eu amo estar contigo</span>
         <span class="frase">você é incrível</span>
-        <span class="frase">não há nada mais lindo que you</span>
-        <span class="frase">imposível não te amar cada dia mais</span>
+        <span class="frase">impossível não te amar cada dia mais</span>
     </div>
 
     <h1>Bem-vinda, meu amor ❤️</h1>
@@ -39,48 +36,30 @@
         Seu navegador não suporta o elemento de áudio.
     </audio>
 
-    <h2>Nossos Momentos 💞</h2>
-<div class="galeria">
-    <img src="{{ url_for('static', filename='img/foto1.jpg') }}" alt="Foto 1">
-    <img src="{{ url_for('static', filename='img/foto2.jpg') }}" alt="Foto 2">
-    <img src="{{ url_for('static', filename='img/foto3.jpg') }}" alt="Foto 3">
-    <!-- Adicione mais fotos conforme quiser -->
-
-</div>
+    <!-- Botão para ir à galeria -->
+    <a href="/galeria" class="botao-amor">Ver nossa história 💞</a>
 
     <!-- Script das Frases Animadas -->
     <script>
-    const frases = document.querySelectorAll('.frase');
-    const cores = ['#ff69b4', '#ff1493', '#db7093', '#ffb6c1', '#e75480'];
+        const frases = document.querySelectorAll('.frase');
+        const cores = ['#ff69b4', '#ff1493', '#db7093', '#ffb6c1', '#e75480'];
 
-    frases.forEach(frase => {
-        // Posição aleatória
-        frase.style.left = Math.random() * 100 + "vw";
-        frase.style.top = Math.random() * 100 + "vh";
-
-        // Duração e tamanho aleatórios
-        frase.style.animationDuration = (5 + Math.random() * 5) + "s";
-        frase.style.fontSize = (16 + Math.random() * 20) + "px";
-
-        // Cor aleatória
-        const corAleatoria = cores[Math.floor(Math.random() * cores.length)];
-        frase.style.color = corAleatoria;
-    });
-
-    <!-- Botão para ir à galeria -->
-<a href="/galeria" class="botao-amor">Ver nossa história 💞</a>
-    
-    // Efeito de flutuação
-    setInterval(() => {
         frases.forEach(frase => {
-            const novaPosicaoX = Math.random() * 100 + "vw";
-            const novaPosicaoY = Math.random() * 100 + "vh";
-            frase.style.left = novaPosicaoX;
-            frase.style.top = novaPosicaoY;
+            frase.style.left = Math.random() * 100 + "vw";
+            frase.style.top = Math.random() * 100 + "vh";
+            frase.style.animationDuration = (5 + Math.random() * 5) + "s";
+            frase.style.fontSize = (16 + Math.random() * 20) + "px";
+            frase.style.color = cores[Math.floor(Math.random() * cores.length)];
         });
-    }, 3000);
-</script>
 
+        // Movimento contínuo das frases
+        setInterval(() => {
+            frases.forEach(frase => {
+                frase.style.left = Math.random() * 100 + "vw";
+                frase.style.top = Math.random() * 100 + "vh";
+            });
+        }, 3000);
+    </script>
 
 </body>
 </html>
