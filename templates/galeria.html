@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Nossa Linha do Tempo 📸</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/estilo.css') }}">
+</head>
+<body>
+
+    <h1>Nossa História 💖</h1>
+
+    <!-- Música diferente -->
+    <audio controls autoplay loop>
+        <source src="{{ url_for('static', filename='music/musica_galeria.mp3') }}" type="audio/mpeg">
+        Seu navegador não suporta o elemento de áudio.
+    </audio>
+
+    <!-- Galeria -->
+    <div class="galeria">
+        <img src="{{ url_for('static', filename='img/foto1.jpg') }}" alt="Foto 1">
+        <img src="{{ url_for('static', filename='img/foto2.jpg') }}" alt="Foto 2">
+        <img src="{{ url_for('static', filename='img/foto3.jpg') }}" alt="Foto 3">
+        <!-- Adicione quantas quiser -->
+    </div>
+
+    <!-- Botão para voltar -->
+    <a href="/" class="botao-amor">Voltar para o começo 🏠</a>
+
+</body>
+</html>
