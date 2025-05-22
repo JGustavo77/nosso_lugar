@@ -19,6 +19,13 @@
         <span class="frase">para sempre</span>
         <span class="frase">você é minha</span>
         <span class="frase">nosso destino</span>
+        <span class="frase">você é o meu sonho</span>
+        <span class="frase">eu só penso em ti</span>
+        <span class="frase">amor da minha vida</span>
+        <span class="frase">eu amo estar contigo</span>
+        <span class="frase">você é incrível</span>
+        <span class="frase">não há nada mais lindo que you</span>
+        <span class="frase">imposível não te amar cada dia mais</span>
     </div>
 
     <h1>Bem-vinda, meu amor ❤️</h1>
@@ -59,6 +66,19 @@
         const corAleatoria = cores[Math.floor(Math.random() * cores.length)];
         frase.style.color = corAleatoria;
     });
+
+    <!-- Botão para ir à galeria -->
+<a href="/galeria" class="botao-amor">Ver nossa história 💞</a>
+    
+    // Efeito de flutuação
+    setInterval(() => {
+        frases.forEach(frase => {
+            const novaPosicaoX = Math.random() * 100 + "vw";
+            const novaPosicaoY = Math.random() * 100 + "vh";
+            frase.style.left = novaPosicaoX;
+            frase.style.top = novaPosicaoY;
+        });
+    }, 3000);
 </script>
 
 
