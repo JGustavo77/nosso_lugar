@@ -9,22 +9,70 @@
 
     <h1>Nossa História 💖</h1>
 
-    <!-- Música diferente -->
+    <!-- Música especial para a galeria -->
     <audio controls autoplay loop>
         <source src="{{ url_for('static', filename='music/musica_galeria.mp3') }}" type="audio/mpeg">
         Seu navegador não suporta o elemento de áudio.
     </audio>
 
-    <!-- Galeria -->
-    <div class="galeria">
-        <img src="{{ url_for('static', filename='img/foto1.jpg') }}" alt="Foto 1">
-        <img src="{{ url_for('static', filename='img/foto2.jpg') }}" alt="Foto 2">
-        <img src="{{ url_for('static', filename='img/foto3.jpg') }}" alt="Foto 3">
-        <!-- Adicione quantas quiser -->
+    <!-- Galeria dividida por meses -->
+    <div class="linha-do-tempo">
+        <!-- Janeiro -->
+        <div class="mes ativo" id="janeiro">
+            <h2>Janeiro</h2>
+            <div class="galeria">
+                <img src="{{ url_for('static', filename='img/janeiro1.jpg') }}" alt="Janeiro 1">
+                <img src="{{ url_for('static', filename='img/janeiro2.jpg') }}" alt="Janeiro 2">
+            </div>
+        </div>
+
+        <!-- Fevereiro -->
+        <div class="mes" id="fevereiro">
+            <h2>Fevereiro</h2>
+            <div class="galeria">
+                <img src="{{ url_for('static', filename='img/fevereiro1.jpg') }}" alt="Fevereiro 1">
+                <img src="{{ url_for('static', filename='img/fevereiro2.jpg') }}" alt="Fevereiro 2">
+            </div>
+        </div>
+
+        <!-- Março -->
+        <div class="mes" id="marco">
+            <h2>Março</h2>
+            <div class="galeria">
+                <img src="{{ url_for('static', filename='img/marco1.jpg') }}" alt="Março 1">
+                <img src="{{ url_for('static', filename='img/marco2.jpg') }}" alt="Março 2">
+            </div>
+        </div>
+
+        <!-- Navegação entre os meses -->
+        <div class="navegacao">
+            <button onclick="mudarMes(-1)">⬅️ Mês anterior</button>
+            <button onclick="mudarMes(1)">Próximo mês ➡️</button>
+        </div>
     </div>
 
-    <!-- Botão para voltar -->
+    <!-- Botão para voltar para o início -->
     <a href="/" class="botao-amor">Voltar para o começo 🏠</a>
+
+    <!-- Script para alternar meses -->
+    <script>
+        let indiceMes = 0;
+        const meses = document.querySelectorAll('.mes');
+
+        function mostrarMes(indice) {
+            meses.forEach(m => m.classList.remove('ativo'));
+            meses[indice].classList.add('ativo');
+        }
+
+        function mudarMes(direcao) {
+            indiceMes += direcao;
+            if (indiceMes < 0) indiceMes = meses.length - 1;
+            if (indiceMes >= meses.length) indiceMes = 0;
+            mostrarMes(indiceMes);
+        }
+
+        mostrarMes(indiceMes);
+    </script>
 
 </body>
 </html>
