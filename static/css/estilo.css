@@ -170,3 +170,27 @@ p {
     background-color: #c71585;
     box-shadow: 0 2px 4px rgba(0,0,0,0.2);
 }
+
+.mes {
+  display: none;
+  opacity: 0;
+  transition: opacity 0.8s ease-in-out;
+}
+
+.mes.ativo {
+  display: block;
+  opacity: 1;
+}
+
+#mes-indicador {
+  font-size: 24px;
+  color: #d63384;
+  margin-top: 20px;
+  font-weight: bold;
+  animation: aparecer 0.6s ease-out;
+}
+
+@keyframes aparecer {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
