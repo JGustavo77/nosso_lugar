@@ -1,10 +1,9 @@
 from flask import Flask
-import views  # importa as rotas
+import views  # só importa o módulo
 
 app = Flask(__name__)
 
 import os
-
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
     app.run(host='0.0.0.0', port=port)
