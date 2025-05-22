@@ -106,3 +106,67 @@ p {
     outline: none;
     box-shadow: 0 0 0 4px rgba(255, 20, 147, 0.5);
 }   
+
+.mes {
+    display: none;
+}
+
+.mes.ativo {
+    display: block;
+}
+
+.navegacao {
+    margin-top: 30px;
+}
+
+.navegacao button {
+    background-color: #ff69b4;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    font-size: 20px;
+    border-radius: 8px;
+    margin: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.navegacao button:hover {
+    background-color: #ff1493;
+}
+.navegacao button:active {
+    background-color: #c71585;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+.mes {
+    display: none;
+}
+
+.mes.ativo {
+    display: block;
+}
+
+.navegacao {
+    margin-top: 20px;
+}
+
+.navegacao button {
+    background-color: #ff69b4;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    font-size: 16px;
+    border-radius: 8px;
+    margin: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.navegacao button:hover {
+    background-color: #ff1493;
+}
+.navegacao button:active {
+    background-color: #c71585;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
