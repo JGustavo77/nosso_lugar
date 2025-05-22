@@ -1,7 +1,10 @@
-from flask import Blueprint, render_template
+from app import app
+from flask import render_template
 
-views_blueprint = Blueprint('views', __name__)
-
-@views_blueprint.route('/')
+@app.route('/')
 def home():
-    return render_template("index.html")
+    return render_template('index.html')
+
+@app.route('/galeria')
+def galeria():
+    return render_template('galeria.html')
