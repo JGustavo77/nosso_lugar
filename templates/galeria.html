@@ -1,78 +1,198 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-    <meta charset="UTF-8">
-    <title>Nossa Linha do Tempo 📸</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/estilo.css') }}">
+  <meta charset="UTF-8">
+  <title>Nossa Linha do Tempo 📸</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/estilo.css') }}">
+  <style>
+    .mes {
+      display: none;
+      opacity: 0;
+      transition: opacity 0.8s ease-in-out;
+    }
+
+    .mes.ativo {
+      display: block;
+      opacity: 1;
+    }
+
+    #mes-indicador {
+      font-size: 24px;
+      color: #d63384;
+      margin-top: 20px;
+      font-weight: bold;
+      animation: aparecer 0.6s ease-out;
+    }
+
+    @keyframes aparecer {
+      from { opacity: 0; transform: translateY(-10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
 </head>
 <body>
 
-    <h1>Nossa História 💖</h1>
+  <h1>Nossa História 💖</h1>
 
-    <!-- Música especial para a galeria -->
-    <audio controls autoplay loop>
-        <source src="{{ url_for('static', filename='music/musica_galeria.mp3') }}" type="audio/mpeg">
-        Seu navegador não suporta o elemento de áudio.
-    </audio>
+  <!-- Música especial para a galeria -->
+  <audio controls autoplay loop>
+    <source src="{{ url_for('static', filename='music/musica_galeria.mp3') }}" type="audio/mpeg">
+    Seu navegador não suporta o elemento de áudio.
+  </audio>
 
-    <!-- Galeria dividida por meses -->
-    <div class="linha-do-tempo">
-        <!-- Janeiro -->
-        <div class="mes ativo" id="janeiro">
-            <h2>Janeiro</h2>
-            <div class="galeria">
-                <img src="{{ url_for('static', filename='img/janeiro1.jpg') }}" alt="Janeiro 1">
-                <img src="{{ url_for('static', filename='img/janeiro2.jpg') }}" alt="Janeiro 2">
-            </div>
-        </div>
+  <!-- Indicador do mês atual -->
+  <div id="mes-indicador">📅 Junho</div>
 
-        <!-- Fevereiro -->
-        <div class="mes" id="fevereiro">
-            <h2>Fevereiro</h2>
-            <div class="galeria">
-                <img src="{{ url_for('static', filename='img/fevereiro1.jpg') }}" alt="Fevereiro 1">
-                <img src="{{ url_for('static', filename='img/fevereiro2.jpg') }}" alt="Fevereiro 2">
-            </div>
-        </div>
+  <!-- Galeria dividida por meses -->
+  <div class="linha-do-tempo">
 
-        <!-- Março -->
-        <div class="mes" id="marco">
-            <h2>Março</h2>
-            <div class="galeria">
-                <img src="{{ url_for('static', filename='img/marco1.jpg') }}" alt="Março 1">
-                <img src="{{ url_for('static', filename='img/marco2.jpg') }}" alt="Março 2">
-            </div>
-        </div>
-
-        <!-- Navegação entre os meses -->
-        <div class="navegacao">
-            <button onclick="mudarMes(-1)">⬅️ Mês anterior</button>
-            <button onclick="mudarMes(1)">Próximo mês ➡️</button>
-        </div>
+    <!-- Junho -->
+    <div class="mes ativo">
+      <h2>Junho</h2>
+      <div class="galeria">
+        <img src="{{ url_for('static', filename='img/junho1.jpg') }}" alt="Junho 1">
+        <img src="{{ url_for('static', filename='img/junho2.jpg') }}" alt="Junho 2">
+      </div>
     </div>
 
-    <!-- Botão para voltar para o início -->
-    <a href="/" class="botao-amor">Voltar para o começo 🏠</a>
+    <!-- Julho -->
+    <div class="mes">
+      <h2>Julho</h2>
+      <div class="galeria">
+        <img src="{{ url_for('static', filename='img/julho1.jpg') }}" alt="Julho 1">
+        <img src="{{ url_for('static', filename='img/julho2.jpg') }}" alt="Julho 2">
+      </div>
+    </div>
 
-    <!-- Script para alternar meses -->
-    <script>
-        let indiceMes = 0;
-        const meses = document.querySelectorAll('.mes');
+    <!-- Agosto -->
+    <div class="mes">
+      <h2>Agosto</h2>
+      <div class="galeria">
+        <img src="{{ url_for('static', filename='img/agosto1.jpg') }}" alt="Agosto 1">
+        <img src="{{ url_for('static', filename='img/agosto2.jpg') }}" alt="Agosto 2">
+      </div>
+    </div>
 
-        function mostrarMes(indice) {
-            meses.forEach(m => m.classList.remove('ativo'));
-            meses[indice].classList.add('ativo');
-        }
+    <!-- Setembro -->
+    <div class="mes">
+      <h2>Setembro</h2>
+      <div class="galeria">
+        <img src="{{ url_for('static', filename='img/setembro1.jpg') }}" alt="Setembro 1">
+        <img src="{{ url_for('static', filename='img/setembro2.jpg') }}" alt="Setembro 2">
+      </div>
+    </div>
 
-        function mudarMes(direcao) {
-            indiceMes += direcao;
-            if (indiceMes < 0) indiceMes = meses.length - 1;
-            if (indiceMes >= meses.length) indiceMes = 0;
-            mostrarMes(indiceMes);
-        }
+    <!-- Outubro -->
+    <div class="mes">
+      <h2>Outubro</h2>
+      <div class="galeria">
+        <img src="{{ url_for('static', filename='img/outubro1.jpg') }}" alt="Outubro 1">
+        <img src="{{ url_for('static', filename='img/outubro2.jpg') }}" alt="Outubro 2">
+      </div>
+    </div>
 
-        mostrarMes(indiceMes);
-    </script>
+    <!-- Novembro -->
+    <div class="mes">
+      <h2>Novembro</h2>
+      <div class="galeria">
+        <img src="{{ url_for('static', filename='img/novembro1.jpg') }}" alt="Novembro 1">
+        <img src="{{ url_for('static', filename='img/novembro2.jpg') }}" alt="Novembro 2">
+      </div>
+    </div>
+
+    <!-- Dezembro -->
+    <div class="mes">
+      <h2>Dezembro</h2>
+      <div class="galeria">
+        <img src="{{ url_for('static', filename='img/dezembro1.jpg') }}" alt="Dezembro 1">
+        <img src="{{ url_for('static', filename='img/dezembro2.jpg') }}" alt="Dezembro 2">
+      </div>
+    </div>
+
+    <!-- Janeiro -->
+    <div class="mes">
+      <h2>Janeiro</h2>
+      <div class="galeria">
+        <img src="{{ url_for('static', filename='img/janeiro1.jpg') }}" alt="Janeiro 1">
+        <img src="{{ url_for('static', filename='img/janeiro2.jpg') }}" alt="Janeiro 2">
+      </div>
+    </div>
+
+    <!-- Fevereiro -->
+    <div class="mes">
+      <h2>Fevereiro</h2>
+      <div class="galeria">
+        <img src="{{ url_for('static', filename='img/fevereiro1.jpg') }}" alt="Fevereiro 1">
+        <img src="{{ url_for('static', filename='img/fevereiro2.jpg') }}" alt="Fevereiro 2">
+      </div>
+    </div>
+
+    <!-- Março -->
+    <div class="mes">
+      <h2>Março</h2>
+      <div class="galeria">
+        <img src="{{ url_for('static', filename='img/marco1.jpg') }}" alt="Março 1">
+        <img src="{{ url_for('static', filename='img/marco2.jpg') }}" alt="Março 2">
+      </div>
+    </div>
+
+    <!-- Abril -->
+    <div class="mes">
+      <h2>Abril</h2>
+      <div class="galeria">
+        <img src="{{ url_for('static', filename='img/abril1.jpg') }}" alt="Abril 1">
+        <img src="{{ url_for('static', filename='img/abril2.jpg') }}" alt="Abril 2">
+      </div>
+    </div>
+
+    <!-- Maio -->
+    <div class="mes">
+      <h2>Maio</h2>
+      <div class="galeria">
+        <img src="{{ url_for('static', filename='img/maio1.jpg') }}" alt="Maio 1">
+        <img src="{{ url_for('static', filename='img/maio2.jpg') }}" alt="Maio 2">
+      </div>
+    </div>
+
+    <!-- Navegação entre os meses -->
+    <div class="navegacao">
+      <button onclick="mudarMes(-1)">⬅️ Mês anterior</button>
+      <button onclick="mudarMes(1)">Próximo mês ➡️</button>
+    </div>
+
+  </div>
+
+  <!-- Botão para voltar para o início -->
+  <a href="/" class="botao-amor">Voltar para o começo 🏠</a>
+
+  <!-- Script para alternar meses -->
+  <script>
+    let indiceMes = 0;
+    const meses = document.querySelectorAll('.mes');
+    const nomesMeses = [
+      "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro",
+      "Dezembro", "Janeiro", "Fevereiro", "Março", "Abril", "Maio"
+    ];
+
+    function mostrarMes(indice) {
+      meses.forEach(m => m.classList.remove('ativo'));
+      meses[indice].classList.add('ativo');
+
+      const indicador = document.getElementById("mes-indicador");
+      if (indicador) indicador.textContent = `📅 ${nomesMeses[indice]}`;
+    }
+
+    function mudarMes(direcao) {
+      indiceMes += direcao;
+      if (indiceMes < 0) indiceMes = meses.length - 1;
+      if (indiceMes >= meses.length) indiceMes = 0;
+      mostrarMes(indiceMes);
+    }
+
+    document.addEventListener("DOMContentLoaded", function () {
+      mostrarMes(indiceMes);
+    });
+  </script>
 
 </body>
 </html>
