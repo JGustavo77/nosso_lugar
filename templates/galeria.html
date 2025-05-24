@@ -10,34 +10,71 @@
   <h1>Nossa História 💖</h1>
 
   <audio controls autoplay loop>
-    <source src="{{ url_for('static', filename='music/musica_galeria.mp3') }}" type="audio/mpeg">
+    <source src="{{ url_for('static', filename='music/tema2.mp3') }}" type="audio/mpeg">
     Seu navegador não suporta o elemento de áudio.
   </audio>
 
   <div id="mes-indicador">📅 Junho</div>
 
   <div class="linha-do-tempo">
+
+   {% set galeria = {
+  'Junho': [
+    'junho1.jpg', 'junho2.jpg', 'junho3.jpg', 'junho4.jpg', 'junho5.jpg',
+    'junho6.jpg', 'junho7.jpg','jun2.mp4', 'junho8.jpg', 'junho9.jpg', 'junho10.jpg',
+    'junho11.jpg', 'junho12.jpg', 'junho13.jpg', 'junho14.jpg', 'junho15.jpg',
+    'junho16.jpg', 'junho17.jpg', 'junho18.jpg', 'junho19.jpg', 'junho20.jpg',
+    'junho21.jpg', 'junho22.jpg', 'junho23.jpg', 'junho24.jpg', 'junho25.jpg',
+    'junho26.jpg', 'jun1.mp4', 
+  ],
+  'Julho': [
+    'julho1.jpg', 'julho2.jpg', 'julho3.jpg', 'julho4.jpg', 'julho5.jpg',
+    'julho6.jpg', 'julho7.jpg', 'julho8.jpg', 'julho9.jpg', 'julho10.jpg',
+    'julho11.jpg', 'julho12.jpg', 'julho13.jpg', 'julho14.jpg', 'julho15.jpg',
+    'julho16.jpg', 'julho17.jpg', 'julho18.jpg', 'julho19.jpg', 'julho20.jpg',
+    'julho21.jpg', 'julho22.jpg', 'julho23.jpg', 'julho24.jpg', 'julho25.jpg'
+  ],
+  'Agosto': [
+    'agosto1.jpg', 'agosto2.jpg', 'agosto3.jpg', 'agosto4.jpg', 'agosto5.jpg',
+    'agosto6.jpg', 'agosto7.jpg', 'agosto8.jpg', 'agosto9.jpg', 'agosto10.jpg',
+    'agosto11.jpg', 'agosto12.jpg', 'agosto13.jpg', 'agosto14.jpg', 'agosto15.jpg',
+    'agosto16.jpg', 'agosto17.jpg', 'agosto18.jpg', 'agosto19.jpg', 'agosto20.jpg',
+    'agosto21.jpg', 'agosto22.jpg', 'agosto23.jpg', 'agosto24.jpg', 'agosto25.jpg'
+  ]
+} %}
+
+
+
     {% set poemas = {
-      "Junho": "Foi em Junho que tudo floresceu... ✨",
-      "Julho": "Em Julho, o amor só cresceu.",
-      "Agosto": "Agosto chegou com risos e calor.",
-      "Setembro": "Setembro nos trouxe sonhos e abraços.",
-      "Outubro": "Outubro dançou com nossos corações.",
-      "Novembro": "Novembro teve cheiro de eternidade.",
-      "Dezembro": "Em Dezembro, o tempo parecia parar.",
-      "Janeiro": "Janeiro começou com juras sinceras.",
-      "Fevereiro": "Fevereiro foi beijo, riso e verão.",
-      "Março": "Março nos uniu mais do que nunca.",
-      "Abril": "Abril trouxe paz no olhar.",
-      "Maio": "Maio floresceu nosso sentir."
+      'Junho': "Foi em Junho que tudo floresceu... ✨",
+      'Julho': "Em Julho, o amor só cresceu.",
+      'Agosto': "Agosto chegou com risos e calor.",
+      'Setembro': "Setembro nos trouxe sonhos e abraços.",
+      'Outubro': "Outubro dançou com nossos corações.",
+      'Novembro': "Novembro teve cheiro de eternidade.",
+      'Dezembro': "Em Dezembro, o tempo parecia parar.",
+      'Janeiro': "Janeiro começou com juras sinceras.",
+      'Fevereiro': "Fevereiro foi beijo, riso e verão.",
+      'Março': "Março nos uniu mais do que nunca.",
+      'Abril': "Abril trouxe paz no olhar.",
+      'Maio': "Maio floresceu nosso sentir."
     } %}
 
-    {% for mes in ["Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro", "Janeiro", "Fevereiro", "Março", "Abril", "Maio"] %}
+    {% for mes, arquivos in galeria.items() %}
     <div class="mes{% if loop.first %} ativo{% endif %}">
       <h2>{{ mes }}</h2>
-      <div class="galeria">
-        <a href="#modal{{ loop.index0 * 2 + 1 }}"><img src="{{ url_for('static', filename='img/' + mes|lower + '1.jpg') }}" alt="{{ mes }} 1"></a>
-        <a href="#modal{{ loop.index0 * 2 + 2 }}"><img src="{{ url_for('static', filename='img/' + mes|lower + '2.jpg') }}" alt="{{ mes }} 2"></a>
+      <div class="carrossel">
+        {% for nome in arquivos %}
+          {% if nome.endswith('.mp4') %}
+            <video autoplay loop muted playsinline>
+              <source src="{{ url_for('static', filename='img/' ~ mes|lower ~ '/' ~ nome) }}" type="video/mp4">
+            </video>
+          {% else %}
+            <a href="#modal_{{ mes|lower }}_{{ loop.index }}">
+              <img src="{{ url_for('static', filename='img/' ~ mes|lower ~ '/' ~ nome) }}" alt="{{ mes }}">
+            </a>
+          {% endif %}
+        {% endfor %}
       </div>
       <div class="poema">{{ poemas[mes] }}</div>
     </div>
@@ -51,19 +88,17 @@
 
   <a href="/" class="botao-amor">Voltar para o começo 🏠</a>
 
-  <!-- Modais de todas as imagens -->
-  {% for mes in ["Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro", "Janeiro", "Fevereiro", "Março", "Abril", "Maio"] %}
-    <div id="modal{{ loop.index0 * 2 + 1 }}" class="modal">
-      <span class="fechar-modal" onclick="location.hash=''">&times;</span>
-      <img class="modal-content" src="{{ url_for('static', filename='img/' + mes|lower + '1.jpg') }}">
-    </div>
-    <div id="modal{{ loop.index0 * 2 + 2 }}" class="modal">
-      <span class="fechar-modal" onclick="location.hash=''">&times;</span>
-      <img class="modal-content" src="{{ url_for('static', filename='img/' + mes|lower + '2.jpg') }}">
-    </div>
+  {% for mes, arquivos in galeria.items() %}
+    {% for nome in arquivos %}
+      {% if not nome.endswith('.mp4') %}
+      <div id="modal_{{ mes|lower }}_{{ loop.index }}" class="modal">
+        <span class="fechar-modal" onclick="location.hash=''">&times;</span>
+        <img class="modal-content" src="{{ url_for('static', filename='img/' ~ mes|lower ~ '/' ~ nome) }}">
+      </div>
+      {% endif %}
+    {% endfor %}
   {% endfor %}
 
-  <!-- Corações flutuando -->
   <script>
     for (let i = 0; i < 20; i++) {
       const coracao = document.createElement("div");
@@ -77,7 +112,7 @@
   <script>
     let indiceMes = 0;
     const meses = document.querySelectorAll('.mes');
-    const nomesMeses = ["Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro", "Janeiro", "Fevereiro", "Março", "Abril", "Maio"];
+    const nomesMeses = Object.keys({{ galeria|tojson }});
 
     function mostrarMes(indice) {
       meses.forEach(m => m.classList.remove('ativo'));
