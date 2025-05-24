@@ -1,238 +1,107 @@
 body {
-    background: linear-gradient(135deg, #ffe6f0, #ffeaf6); /* degrade romântico */
-    font-family: 'Arial', sans-serif;
-    text-align: center;
-    padding: 30px;
+  background: linear-gradient(135deg, #0d0d0d, #4b0039); /* preto para magenta escuro */
+  font-family: 'Arial', sans-serif;
+  text-align: center;
+  padding: 30px;
+  color: #f9f9f9;
 }
 
 h1 {
-    color: #d63384;
-    font-family: 'Segoe Script', cursive; /* parece letra de carta */
-    font-size: 36px;
-    text-shadow: 1px 1px 3px #fff; /* brilho leve */
+  color: #ff85a2;
+  font-family: 'Segoe Script', cursive;
+  font-size: 36px;
+  text-shadow: 1px 1px 3px #000;
 }
 
 img {
-    width: 300px;
-    border-radius: 12px;
-    margin-top: 20px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-}
-p {
-    font-size: 18px;
-    color: #333;
-    margin-top: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
 }
 
 .frases-amor {
-    position: absolute;
-    top: 0;
-    left: 0;
-    pointer-events: none;
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-    z-index: 10;
+  position: absolute;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: 10;
 }
 
 .frase {
-    position: absolute;
-    color: #ff69b4;
-    font-size: 20px;
-    animation: flutuar 10s linear infinite;
-    font-family: 'Segoe Script', cursive;
+  position: absolute;
+  color: #ff005d;
+  font-size: 20px;
+  animation: flutuar 10s linear infinite;
+  font-family: 'Segoe Script', cursive;
 }
 
 @keyframes flutuar {
-    0% {
-        transform: translateY(100vh) rotate(0deg);
-        opacity: 0;
-    }
-    50% {
-        opacity: 1;
-    }
-    100% {
-        transform: translateY(-100vh) rotate(360deg);
-        opacity: 0;
-    }
+  0% {
+    transform: translateY(100vh) rotate(0deg);
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-100vh) rotate(360deg);
+    opacity: 0;
+  }
 }
 
-.galeria {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 15px;
-    margin-top: 30px;
+.carrossel {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 15px;
+  padding: 10px;
+  scroll-behavior: smooth;
+  margin-top: 30px;
 }
 
-.galeria img {
-    width: 180px;
-    height: auto;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-    transition: transform 0.3s, box-shadow 0.3s;
+.carrossel img {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+  transition: transform 0.3s ease;
 }
 
-.galeria img:hover {
-    transform: scale(1.05);
-    box-shadow: 0 6px 12px rgba(0,0,0,0.3);
-}
-.galeria img:active {
-    transform: scale(0.95);
-    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+.carrossel img:hover {
+  transform: scale(1.05);
 }
 
 .botao-amor {
-    display: inline-block;
-    margin-top: 30px;
-    padding: 12px 24px;
-    background-color: #ff69b4;
-    color: white;
-    text-decoration: none;
-    font-size: 18px;
-    border-radius: 25px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-    transition: background-color 0.3s;
+  display: inline-block;
+  margin: 40px auto 0;
+  padding: 12px 28px;
+  background-color: #ff69b4;
+  color: white;
+  text-decoration: none;
+  font-size: 18px;
+  border-radius: 30px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  transition: transform 0.3s ease, background-color 0.3s ease;
 }
 
 .botao-amor:hover {
-    background-color: #ff1493;
-}
-.botao-amor:active {
-    background-color: #c71585;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
-}
-.botao-amor:focus {
-    outline: none;
-    box-shadow: 0 0 0 4px rgba(255, 20, 147, 0.5);
-}   
-
-.mes {
-    display: none;
-}
-
-.mes.ativo {
-    display: block;
-}
-
-.navegacao {
-    margin-top: 30px;
-}
-
-.navegacao button {
-    background-color: #ff69b4;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    font-size: 20px;
-    border-radius: 8px;
-    margin: 10px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-
-.navegacao button:hover {
-    background-color: #ff1493;
-}
-.navegacao button:active {
-    background-color: #c71585;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
-}
-
-.mes {
-    display: none;
-}
-
-.mes.ativo {
-    display: block;
-}
-
-.navegacao {
-    margin-top: 20px;
-}
-
-.navegacao button {
-    background-color: #ff69b4;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    font-size: 16px;
-    border-radius: 8px;
-    margin: 10px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-
-.navegacao button:hover {
-    background-color: #ff1493;
-}
-.navegacao button:active {
-    background-color: #c71585;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
-}
-
-.mes {
-  display: none;
-  opacity: 0;
-  transition: opacity 0.8s ease-in-out;
-}
-
-.mes.ativo {
-  display: block;
-  opacity: 1;
+  background-color: #ff1493;
+  transform: scale(1.05);
 }
 
 #mes-indicador {
+  font-family: 'Segoe Script', cursive;
+  background-color: #fff0f5;
+  padding: 10px 20px;
+  border-radius: 20px;
+  display: inline-block;
+  margin: 20px auto;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.1);
   font-size: 24px;
   color: #d63384;
-  margin-top: 20px;
-  font-weight: bold;
-  animation: aparecer 0.6s ease-out;
 }
 
-@keyframes aparecer {
-  from { opacity: 0; transform: translateY(-10px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-/* Responsividade para celular */
-@media (max-width: 768px) {
-  .galeria {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .galeria img {
-    width: 90%;
-    margin-bottom: 15px;
-  }
-
-  .navegacao {
-    flex-direction: column;
-  }
-
-  .navegacao button {
-    width: 80%;
-    margin: 8px auto;
-  }
-
-  #mes-indicador {
-    font-size: 20px;
-    margin-bottom: 10px;
-  }
-}
-
-/* Galeria com fade suave */
-.galeria img {
-  transition: transform 0.4s ease, opacity 0.4s ease;
-}
-
-.galeria img:hover {
-  transform: scale(1.03);
-  opacity: 0.95;
-}
-
-/* Botões estilizados */
 .navegacao {
   display: flex;
   justify-content: center;
@@ -257,54 +126,17 @@ p {
   background: linear-gradient(to right, #ff5f95, #ff2f6a);
 }
 
-.botao-amor {
-  display: inline-block;
-  margin: 40px auto 0;
-  padding: 12px 28px;
-  background-color: #ff69b4;
-  color: white;
-  text-decoration: none;
-  font-size: 18px;
-  border-radius: 30px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-  transition: transform 0.3s ease, background-color 0.3s ease;
+.mes {
+  display: none;
+  opacity: 0;
+  transition: opacity 0.8s ease-in-out;
 }
 
-.botao-amor:hover {
-  background-color: #ff1493;
-  transform: scale(1.05);
+.mes.ativo {
+  display: block;
+  opacity: 1;
 }
 
-/* Indicador com destaque */
-#mes-indicador {
-  font-family: 'Segoe Script', cursive;
-  background-color: #fff0f5;
-  padding: 10px 20px;
-  border-radius: 20px;
-  display: inline-block;
-  margin: 20px auto;
-  box-shadow: 0 3px 10px rgba(0,0,0,0.1);
-}
-
-/* Corações flutuando */
-.coracao {
-  position: fixed;
-  width: 20px;
-  height: 20px;
-  background: url('../img/coracao.png') no-repeat center/contain;
-  animation: flutuarCoracao 6s linear infinite;
-  pointer-events: none;
-  opacity: 0.6;
-  z-index: 0;
-}
-
-@keyframes flutuarCoracao {
-  0% { transform: translateY(100vh) scale(1); opacity: 0; }
-  50% { opacity: 1; }
-  100% { transform: translateY(-10vh) scale(1.2); opacity: 0; }
-}
-
-/* Poema com fade suave */
 .poema {
   font-family: 'Segoe Script', cursive;
   font-size: 18px;
@@ -312,13 +144,13 @@ p {
   opacity: 0;
   animation: fadePoema 1.5s ease forwards;
   animation-delay: 1s;
+  color: #fcb8d2;
 }
 
 @keyframes fadePoema {
   to { opacity: 1; }
 }
 
-/* Modal de imagem */
 .modal {
   display: none;
   position: fixed;
@@ -349,4 +181,85 @@ p {
   font-size: 28px;
   font-weight: bold;
   cursor: pointer;
+}
+
+.coracao {
+  position: fixed;
+  width: 20px;
+  height: 20px;
+  background: url('../img/coracao.png') no-repeat center/contain;
+  animation: flutuarCoracao 6s linear infinite;
+  pointer-events: none;
+  opacity: 0.6;
+  z-index: 0;
+}
+
+@keyframes flutuarCoracao {
+  0% { transform: translateY(100vh) scale(1); opacity: 0; }
+  50% { opacity: 1; }
+  100% { transform: translateY(-10vh) scale(1.2); opacity: 0; }
+}
+
+@media (max-width: 768px) {
+  .carrossel {
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  }
+
+  .navegacao {
+    flex-direction: column;
+  }
+
+  .navegacao button {
+    width: 80%;
+    margin: 8px auto;
+  }
+
+  #mes-indicador {
+    font-size: 20px;
+    margin-bottom: 10px;
+  }
+}
+@media (max-width: 480px) {
+  h1 {
+    font-size: 28px;
+  }
+
+  .frase {
+    font-size: 16px;
+  }
+
+  .botao-amor {
+    font-size: 16px;
+    padding: 10px 20px;
+  }
+
+  .poema {
+    font-size: 16px;
+  }
+}
+
+.carrossel video {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  transition: transform 0.3s ease;
+  object-fit: cover;
+}
+.carrossel video:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+}
+
+.carrossel video:active {
+  transform: scale(0.95);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+}
+.carrossel video:focus {
+  outline: none;
+  box-shadow: 0 0 0 4px rgba(255, 105, 180, 0.5);
+}
+
+.carrossel video::-webkit-media-controls {
+  display: none !important;
 }
