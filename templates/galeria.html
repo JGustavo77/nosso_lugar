@@ -3,6 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <title>Nossa Linha do Tempo 📸</title>
+  <!-- Swiper CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <link rel="stylesheet" href="{{ url_for('static', filename='css/estilo.css') }}">
 </head>
 <body>
@@ -125,6 +129,24 @@
     {% endfor %}
   {% endfor %}
 
+  <!-- Swiper JS -->
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  <script>
+    const modals = document.querySelectorAll('.modal');
+    modals.forEach(modal => {
+      modal.addEventListener('click', function(event) {
+        if (event.target === this || event.target.classList.contains('fechar-modal')) {
+          this.style.display = 'none';
+        }
+      });
+    });
+
+    window.addEventListener('hashchange', function() {
+      const hash = location.hash;
+      modals.forEach(modal => {
+        modal.style.display = modal.id === hash.substring(1) ? 'block' : 'none';
+      });
+    });
   <script>
     for (let i = 0; i < 20; i++) {
       const coracao = document.createElement("div");
