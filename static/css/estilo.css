@@ -1,3 +1,4 @@
+/* Estilos Gerais */
 body {
   background: linear-gradient(135deg, #0d0d0d, #4b0039);
   background-attachment: fixed;
@@ -7,30 +8,40 @@ body {
   text-align: center;
   padding: 20px;
   color: #f9f9f9;
+  margin: 0; /* Reset default margin */
+  min-height: 100vh; /* Ensure body takes full height */
+  overflow-x: hidden; /* Prevent horizontal scroll */
 }
-
 
 h1 {
   color: #ff85a2;
   font-family: 'Segoe Script', cursive;
   font-size: 36px;
   text-shadow: 1px 1px 3px #000;
+  margin-top: 20px;
+  margin-bottom: 30px;
 }
 
-img {
+/* Estilos da Página Inicial (index.html) */
+.index-img {
+  max-width: 90%; /* Make image responsive */
+  width: 320px; /* Keep a max size */
+  height: auto;
   border-radius: 12px;
   box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  margin: 20px auto;
+  display: block;
 }
 
 .frases-amor {
-  position: absolute;
+  position: fixed; /* Use fixed to keep them during scroll */
   top: 0;
   left: 0;
   pointer-events: none;
   width: 100%;
   height: 100%;
   overflow: hidden;
-  z-index: 10;
+  z-index: -1; /* Behind content */
 }
 
 .frase {
@@ -39,6 +50,8 @@ img {
   font-size: 20px;
   animation: flutuar 23s linear infinite;
   font-family: 'Segoe Script', cursive;
+  white-space: nowrap; /* Prevent wrapping */
+  opacity: 0;
 }
 
 @keyframes flutuar {
@@ -46,13 +59,85 @@ img {
     transform: translateY(100vh) rotate(0deg);
     opacity: 0;
   }
-  50% {
-    opacity: 1;
+  10%, 90% {
+    opacity: 0.7; /* Fade in/out */
   }
   100% {
-    transform: translateY(-100vh) rotate(360deg);
+    transform: translateY(-10vh) rotate(360deg);
     opacity: 0;
   }
+}
+
+/* Estilos da Galeria (galeria.html) */
+.audio-container {
+  margin: 20px auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+}
+
+#play-pause-button {
+  background-color: #ff69b4;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  font-size: 20px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#play-pause-button:hover {
+  background-color: #ff1493;
+  transform: scale(1.1);
+}
+
+#background-music {
+  /* Hide default controls if using custom button */
+  /* width: 80%; /* Or adjust as needed */
+  /* max-width: 400px; */
+  display: none; /* Hide if only using the button */
+}
+
+#mes-indicador {
+  font-family: 'Segoe Script', cursive;
+  background-color: #fff0f5;
+  padding: 10px 20px;
+  border-radius: 20px;
+  display: inline-block;
+  margin: 20px auto 30px auto; /* Added bottom margin */
+  box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+  font-size: 24px;
+  color: #d63384;
+}
+
+.linha-do-tempo {
+  width: 95%;
+  max-width: 1200px; /* Limit max width */
+  margin: 0 auto;
+}
+
+.mes {
+  display: none; /* Controlled by JS */
+  opacity: 0;
+  transition: opacity 0.8s ease-in-out;
+  margin-bottom: 40px; /* Space between months */
+}
+
+.mes.ativo {
+  display: block;
+  opacity: 1;
+}
+
+.mes h2 {
+  color: #ffadc0;
+  font-family: 'Segoe Script', cursive;
+  margin-bottom: 20px;
 }
 
 .carrossel {
@@ -60,33 +145,79 @@ img {
   grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
   gap: 15px;
   padding: 10px;
-  scroll-behavior: smooth;
-  margin-top: 30px;
 }
 
-img {
-  width: 100%;
-  max-width: 320px;
-  height: auto;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-  transform-origin: center center; /* <- Fixa o ponto de zoom no centro */
+.media-container {
+  position: relative;
+  overflow: hidden;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.carrossel img {
-  transform-origin: center center; /* <- Redundância segura */
-}
-
-.carrossel img:hover {
+.media-container:hover {
   transform: scale(1.05);
-  box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+  box-shadow: 0 6px 12px rgba(0,0,0,0.4);
 }
 
+.media-container img,
+.media-container video {
+  display: block;
+  width: 100%;
+  height: 100%; /* Ensure media fills container */
+  object-fit: cover; /* Cover the container */
+  border-radius: 10px; /* Match container radius */
+}
+
+.media-container a {
+  display: block; /* Make link fill container */
+  height: 100%;
+}
+
+/* Specific adjustments for video controls if needed */
+
+.poema {
+  font-family: 'Segoe Script', cursive;
+  font-size: 18px;
+  margin-top: 25px; /* Space above poem */
+  color: #fcb8d2;
+  opacity: 0;
+  animation: fadePoema 1.5s ease forwards;
+  animation-delay: 0.5s; /* Start fade-in sooner */
+}
+
+@keyframes fadePoema {
+  to { opacity: 1; }
+}
+
+/* Navegação e Botões */
+.navegacao {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 30px;
+  gap: 20px; /* Add gap between buttons */
+}
+
+.navegacao button {
+  background: linear-gradient(to right, #ff85a2, #ff4f81);
+  color: #fff;
+  border: none;
+  border-radius: 30px;
+  padding: 12px 24px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: transform 0.2s ease, background 0.3s ease;
+}
+
+.navegacao button:hover {
+  transform: scale(1.05);
+  background: linear-gradient(to right, #ff5f95, #ff2f6a);
+}
 
 .botao-amor {
   display: inline-block;
-  margin: 40px auto 0;
+  margin: 40px auto 20px auto; /* Adjusted margin */
   padding: 12px 28px;
   background-color: #ff69b4;
   color: white;
@@ -102,252 +233,173 @@ img {
   transform: scale(1.05);
 }
 
-#mes-indicador {
-  font-family: 'Segoe Script', cursive;
-  background-color: #fff0f5;
-  padding: 10px 20px;
-  border-radius: 20px;
-  display: inline-block;
-  margin: 20px auto;
-  box-shadow: 0 3px 10px rgba(0,0,0,0.1);
-  font-size: 24px;
-  color: #d63384;
-}
-
-.navegacao {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  margin-top: 30px;
-}
-
-.navegacao button {
-  background: linear-gradient(to right, #ff85a2, #ff4f81);
-  color: #fff;
-  border: none;
-  border-radius: 30px;
-  padding: 12px 24px;
-  font-size: 16px;
-  margin: 10px;
-  cursor: pointer;
-  transition: transform 0.2s ease, background 0.3s ease;
-}
-
-.navegacao button:hover {
-  transform: scale(1.05);
-  background: linear-gradient(to right, #ff5f95, #ff2f6a);
-}
-
-.mes {
-  display: none;
-  opacity: 0;
-  transition: opacity 0.8s ease-in-out;
-}
-
-.mes.ativo {
-  display: block;
-  opacity: 1;
-}
-
-.poema {
-  font-family: 'Segoe Script', cursive;
-  font-size: 18px;
-  margin-top: 10px;
-  opacity: 0;
-  animation: fadePoema 1.5s ease forwards;
-  animation-delay: 1s;
-  color: #fcb8d2;
-}
-
-@keyframes fadePoema {
-  to { opacity: 1; }
-}
-
+/* Modal */
 .modal {
   display: none;
   position: fixed;
-  z-index: 100;
+  z-index: 1000; /* Ensure modal is on top */
   left: 0;
   top: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.8);
+  background-color: rgba(0, 0, 0, 0.85); /* Slightly darker background */
+  overflow: auto; /* Allow scroll if content overflows */
+  padding: 20px;
+  box-sizing: border-box;
 }
 
 .modal-content {
+  display: block;
   margin: auto;
-  position: absolute;
+  max-width: 90%;
+  max-height: 90vh;
+  width: auto; /* Allow image to determine width */
+  height: auto; /* Allow image to determine height */
+  position: absolute; /* Center using absolute positioning */
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  max-height: 90vh;
-  max-width: 90vw;
-}
-
-
-.modal:target {
-  display: block;
 }
 
 .fechar-modal {
   position: absolute;
-  top: 20px;
-  right: 30px;
-  color: white;
-  font-size: 28px;
+  top: 15px;
+  right: 35px;
+  color: #f1f1f1;
+  font-size: 40px;
   font-weight: bold;
   cursor: pointer;
+  transition: color 0.3s ease;
 }
 
+.fechar-modal:hover,
+.fechar-modal:focus {
+  color: #bbb;
+  text-decoration: none;
+}
+
+/* Corações Flutuantes */
 .coracao {
-  position: fixed;
+  position: fixed; /* Use fixed so they float over everything */
   width: 20px;
   height: 20px;
-  background: url('../img/coracao.png') no-repeat center/contain;
-  animation: flutuarCoracao 6s linear infinite;
+  /* Use a unicode heart or an SVG for better scaling/performance */
+  /* background: url('../img/coracao.png') no-repeat center/contain; */
   pointer-events: none;
-  opacity: 0.6;
-  z-index: 0;
+  opacity: 0;
+  z-index: 999; /* Below modal but above content */
+  animation: flutuarCoracao 6s linear infinite;
+  font-size: 20px; /* If using text heart */
+  color: rgba(255, 105, 180, 0.6); /* Pink heart color */
+}
+
+.coracao::before {
+    content: '❤️'; /* Unicode heart */
 }
 
 @keyframes flutuarCoracao {
-  0% { transform: translateY(100vh) scale(1); opacity: 0; }
-  50% { opacity: 1; }
+  0% { transform: translateY(100vh) scale(0.8); opacity: 0; }
+  10% { opacity: 0.7; }
+  90% { opacity: 0.7; }
   100% { transform: translateY(-10vh) scale(1.2); opacity: 0; }
 }
 
+/* Responsividade */
 @media (max-width: 768px) {
+  h1 {
+    font-size: 30px;
+  }
+
   .carrossel {
-    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 10px;
   }
 
   .navegacao {
     flex-direction: column;
+    align-items: center;
+    gap: 10px;
   }
 
   .navegacao button {
-    width: 80%;
-    margin: 8px auto;
+    width: 70%;
+    max-width: 250px;
+    padding: 10px 20px;
+    font-size: 15px;
   }
 
   #mes-indicador {
     font-size: 20px;
-    margin-bottom: 10px;
-  }
-}
-@media (max-width: 480px) {
-  h1 {
-    font-size: 28px;
-  }
-
-  .frase {
-    font-size: 16px;
-  }
-
-  .botao-amor {
-    font-size: 16px;
-    padding: 10px 20px;
   }
 
   .poema {
     font-size: 16px;
   }
-}
-.carrossel video {
-  width: 100%;
-  max-width: 320px;
-  height: auto;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-  transform-origin: center center; /* <- Fixa o ponto de zoom no centro */
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
 
-.carrossel video:hover {
-  transform: scale(1.05);
-  box-shadow: 0 6px 12px rgba(0,0,0,0.3);
-}
-.carrossel video:active {
-  transform: scale(0.95);
-  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
-}
-.carrossel video:focus {
-  outline: none;
-  box-shadow: 0 0 0 4px rgba(255, 105, 180, 0.5);
-}
-
-.carrossel video::-webkit-media-controls {
-  display: none !important;
-}
-
-@media (max-width: 480px) {
-  h1 {
-    font-size: 24px;
-    padding: 0 10px;
+  .botao-amor {
+    font-size: 16px;
+    padding: 10px 22px;
   }
 
   .frase {
+      font-size: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  body {
+    padding: 10px;
+  }
+
+  h1 {
+    font-size: 24px;
+  }
+
+  .carrossel {
+    grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+    gap: 8px;
+  }
+
+  #mes-indicador {
+    font-size: 18px;
+    padding: 8px 15px;
+  }
+
+  .navegacao button {
+    width: 80%;
     font-size: 14px;
   }
 
   .botao-amor {
     font-size: 14px;
-    padding: 10px 20px;
+    padding: 9px 18px;
   }
 
-  audio {
-    width: 100%;
-    margin: 10px 0;
+  .poema {
+    font-size: 15px;
   }
 
-  #mes-indicador {
-    font-size: 18px;
-  }
-}
-
-@media (max-width: 768px) {
-  .carrossel {
-    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  .frase {
+      font-size: 14px;
+      /* Consider reducing number of phrases on small screens via JS if needed */
   }
 
-  .navegacao {
-    flex-direction: column;
+  .fechar-modal {
+      font-size: 30px;
+      top: 10px;
+      right: 20px;
   }
 
-  .navegacao button {
-    width: 80%;
-    margin: 8px auto;
-  }
-
-  #mes-indicador {
-    font-size: 20px;
-    margin-bottom: 10px;
+  #play-pause-button {
+      width: 35px;
+      height: 35px;
+      font-size: 18px;
   }
 }
 
-.swiper {
-  width: 100%;
-  padding-top: 10px;
-  padding-bottom: 40px;
-}
+/* Remove Swiper specific styles if not used */
+/* .swiper { ... } */
+/* .swiper-slide { ... } */
 
-.swiper-slide {
-  background: none;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.swiper-slide img,
-.swiper-slide video {
-  max-width: 100%;
-  max-height: 250px;
-  border-radius: 10px;
-  object-fit: cover;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-}
-.swiper-slide img:hover,
-.swiper-slide video:hover {
-  transform: scale(1.05);
-  box-shadow: 0 6px 12px rgba(0,0,0,0.4);
-}
+/* .swiper-pagination { ... } */
+/* .swiper-button-next, .swiper-button-prev { ... } */
