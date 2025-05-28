@@ -2,225 +2,214 @@
 <html lang="pt-br">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Added viewport for responsiveness -->
   <title>Nossa Linha do Tempo 📸</title>
-  <!-- Swiper CSS -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
-  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <!-- Swiper CSS (Consider if still needed after grid layout) -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
   <link rel="stylesheet" href="{{ url_for('static', filename='css/estilo.css') }}">
+  <!-- Consider loading JS at the end of body for performance -->
 </head>
 <body>
 
   <h1>Nossa História 💖</h1>
 
-  <audio controls autoplay loop>
-    <source src="{{ url_for('static', filename='music/tema2.mp3') }}" type="audio/mpeg">
-    Seu navegador não suporta o elemento de áudio.
-  </audio>
+  <!-- Improved Audio Controls -->
+  <div class="audio-container">
+    <audio id="background-music" loop>
+        <source src="{{ url_for('static', filename='music/tema2.mp3') }}" type="audio/mpeg">
+        Seu navegador não suporta o elemento de áudio.
+    </audio>
+    <button id="play-pause-button">⏯️</button> <!-- Play/Pause Button -->
+  </div>
 
-  <div id="mes-indicador">📅 Junho</div>
+  <div id="mes-indicador">📅 {{ meses_ordenados[0] if meses_ordenados else 'Galeria' }}</div>
 
   <div class="linha-do-tempo">
-
-  {% set galeria = {
-  'Junho': [
-    'junho1.jpg', 'junho2.jpg', 'junho3.jpg', 'junho4.jpg', 'junho5.jpg',
-    'junho6.jpg', 'junho7.jpg','jun2.mp4', 'junho8.jpg', 'junho9.jpg', 'junho10.jpg',
-    'junho11.jpg', 'junho12.jpg', 'junho13.jpg', 'junho14.jpg', 'junho15.jpg',
-    'junho16.jpg', 'junho17.jpg', 'junho18.jpg', 'junho19.jpg', 'junho20.jpg',
-    'junho21.jpg', 'junho22.jpg', 'junho23.jpg', 'junho24.jpg', 'junho25.jpg',
-    'junho26.jpg', 'jun1.mp4', 'junhox.jpg'
-  ],
-  'Julho': [
-    'julho1.jpg', 'julho2.jpg', 'julho3.jpg', 'julho4.jpg', 'julho5.webp',
-    'julho6.webp', 'julho7.jpg', 'julho8.jpg', 'julho9.jpg', 'julho10.jpg',
-    'julho11.jpg', 'julho12.jpg', 'julho13.jpg', 'julho14.jpg', 'julho15.jpg',
-    'julho16.jpg'
-  ],
-  'Agosto': [
-    'agosto1.jpg', 'agosto2.jpg', 'agosto3.webp', 'agosto4.webp', 'agosto5.jpg',
-    'agosto6.jpg', 'agosto7.jpg', 'ago3.mp4','ago2.mp4','agosto8.jpg', 'agosto9.jpg', 'agosto10.jpg',
-    'agosto11.jpg', 'agosto12.jpg', 'agosto13.jpg', 'agosto14.jpg', 'agosto15.jpg',
-    'agosto16.jpg', 'agosto17.jpg', 'agosto18.webp', 'agosto19.jpg', 'agosto20.png',
-    'agosto21.jpg'
-  ],
-  'Setembro': [
-    'setembro1.webp', 'setembro2.webp', 'setembro3.jpg', 'setembro4.jpg', 'setembro5.jpg',
-    'set1.mp4', 'setembrox4.jpg', 'setembrox.jpg', 'setembrox.2.jpg', 'setembrox3.jpg',
-  ],
-
-  'Outubro': [
-    'outubro1.jpg', 'outubro2.jpg', 'outubro3.jpg', 'outubro4.jpg', 'outubro5.webp',
-    'outubro6.jpg', 'outubro7.jpg', 'outubro8.jpg', 'outubro9.jpg', 'outubro10.jpg',
-    'outubro11.jpg', 'outubro12.jpg', 'outubro13.mp4',
-    'outubro18.jpg', 'outubro19.jpg', 'outubro20.jpg',
-    'outubro21.jpg', 'outubro22.mp4', 'outubro23.jpg',
-    'outubro26.jpg', 'outubro27.png', 'outubro28.jpg', 'outubro29.jpg', 'outubro30.jpg', 'outubro31.mp4',
-    'outubro34.webp','out1.mp4', 'oct1.jpg', 'oct2.jpg', 'oct3.jpg', 'oct4.jpg',
-    'oct5.jpg', 'oct6.jpg', 'oct7.jpg', 'oct8.jpg', 'oct9.jpg', 'oct10.jpg',
-    'oct11.jpg', 'oct12.jpg', 'oct13.jpg'
-
-    ],
-
-  'Novembro': [
-    'novembro1.mp4', 'novembro2.jpg', 'novembro3.jpg', 'novembro4.jpg', 'novembro5.jpg',
-    'novembro6.jpg'
-  ],
-
-  'Dezembro': [
-    'dezembro1.jpg', 'dezembro2.jpg', 'dezembro3.jpg', 'dezembro4.jpg', 'dezembro5.jpg',
-    'dezembro5.mp4', 'dezembro6.jpg', 'dezembro7.jpg', 'dezembro8.mp4', 'dez1.jpg','dez2.jpg'
-  ],
-
-  'Janeiro': [
-    'janz1.mp4','janz2.mp4','jan1.jpg', 'jan2.jpg', 'jan3.webp',
-    
-  ],
-
-  'Fevereiro': [
-    'fev1.jpg', 'fev2.jpg', 'fev3.jpg', 'fev4.jpg', 'fev5.jpg',
-    'fev6.jpg', 'fev7.jpg', 'fev8.jpg', 'fev9.jpg', 'fev10.jpg',
-    'fev11.jpg', 'fev12.jpg'
-  ],
-
-  'Março': [
-    'mar1.jpg', 'mar2.jpg', 'mar3.jpg', 'mar4.jpg', 'mar5.jpg',
-    'mar6.jpg', 'mar7.jpg', 'mar8.jpg', 'mar9.jpg', 'mar10.jpg','mar11.jpg',
-    'mar12.jpg', 'mar13.jpg', 'mar14.jpg', 'mar15.jpg', 'mar16.jpg','mar17.jpg',
-    'mar18.jpg', 'mar19.webp', 'mar20.jpg', 'mar21.jpg', 'mar22.jpg','mar23.jpg',
-    'mar24.png', 'mar25.png', 'mar26.png', 'mar27.jpg','mar28.jpg',
-    'mar29.jpg', 'mar30.jpg', 'mar31.jpg', 'mar32.jpg', 'mar33.jpg','mar34.jpg',
-    'mar35.jpg', 'mar36.jpg', 'mar37.jpg', 'mar38.jpg', 'mar39.jpg','mar40.jpg','mar41.jpg',
-  'mar43.jpg', 'mar44.jpg',
-  ],
-  'Abril': [
-    'abr1.jpg', 'abr2.jpg', 'abr3.jpg', 'abr4.jpg', 'abr5.jpg',
-    'abr6.jpg', 'abr7.jpg', 'abr8.mp4', 'abr9.jpg', 'abr10.jpg',
-    'abr11.jpg', 'abr12.jpg', 'abr13.jpg', 'abr14.jpg', 'abr15.jpg',
-    'abr16.jpg', 'abr17.jpg', 'abr18.mp4'
-  ],
-  'Maio': [
-    'mai1.jpg', 'mai2.jpg', 'mai3.jpg', 'mai4.mp4', 'mai5.jpg',
-    'mai6.jpg', 'mai7.mp4', 'mai8.mp4', 'mai9.jpg', 'mai10.jpeg',
-    'mai11.jpeg', 'mai12.jpeg', 'mai13.jpeg', 'mai14.jpeg', 'mai15.jpeg',
-    'mai16.jpeg', 'mai17.jpeg', 'mai18.jpeg', 'mai19.jpeg', 'mai20.jpeg',
-    'mai21.jpeg', 'mai22.jpeg', 'mai23.jpeg', 'mai24.jpeg', 'mai25.jpeg',
-    'mai26.jpg', 'mai27.png', 'mai28.png', 'mai29.png', 'mai30.png',
-    'mai31.png', 'mai32.png', 'mai33.png', 'mai34.png', 'mai35.png',
-    'mai36.png', 'mai37.png', 'mai38.png', 'mai39.png', 'mai40.jpg',
-    'mai41.jpg', 'mai42.mp4','mai45.jpg','mai46.jpg','mai47.jpg','mai48.jpg',
-    'mai49.jpg','mai50.jpg','mai51.jpg','mai52.jpg','mai53.jpg','mai54.jpg',
-    'mai55.jpg','mai56.jpg','mai57.jpg','mai58.mp4','mai59.mp4'
-    ]
-} %}
-
-
-
-    {% set poemas = {
-      'Junho': "Foi em Junho que tudo floresceu... ✨",
-      'Julho': "Em Julho, o amor só cresceu.",
-      'Agosto': "Agosto chegou com risos e calor.",
-      'Setembro': "Setembro nos trouxe sonhos e abraços.",
-      'Outubro': "Outubro dançou com nossos corações.",
-      'Novembro': "Novembro teve cheiro de eternidade.",
-      'Dezembro': "Em Dezembro, o tempo parecia parar.",
-      'Janeiro': "Janeiro começou com juras sinceras.",
-      'Fevereiro': "Fevereiro foi beijo, riso e verão.",
-      'Março': "Março nos uniu mais do que nunca.",
-      'Abril': "Abril trouxe paz no olhar.",
-      'Maio': "Maio floresceu nosso sentir."
-    } %}
-
-    {% for mes, arquivos in galeria.items() %}
-    <div class="mes{% if loop.first %} ativo{% endif %}">
-      <h2>{{ mes }}</h2>
-      <div class="carrossel">
-        {% for nome in arquivos %}
-          {% if nome.endswith('.mp4') %}
-            <video autoplay loop muted playsinline>
-              <source src="{{ url_for('static', filename='img/' ~ mes|lower ~ '/' ~ nome) }}" type="video/mp4">
-            </video>
-          {% else %}
-            <a href="#modal_{{ mes|lower }}_{{ loop.index }}">
-              <img src="{{ url_for('static', filename='img/' ~ mes|lower ~ '/' ~ nome) }}" alt="{{ mes }}">
-            </a>
-          {% endif %}
-        {% endfor %}
+    <!-- Loop through months passed from Flask -->
+    {% for mes in meses_ordenados %}
+      {% if mes in galeria %}
+      <div class="mes{% if loop.first %} ativo{% endif %}" data-mes="{{ mes }}">
+        <h2>{{ mes }}</h2>
+        <div class="carrossel">
+          {% for nome in galeria[mes] %}
+            {% set file_path = url_for('static', filename='img/' ~ mes|lower ~ '/' ~ nome) %}
+            {% if nome.lower().endswith(('.mp4', '.mov', '.avi')) %}
+              <div class="media-container video-container">
+                <video controls muted playsinline preload="metadata"> <!-- Added controls, preload; removed autoplay loop -->
+                  <source src="{{ file_path }}" type="video/mp4"> <!-- Adjust type if needed -->
+                  Seu navegador não suporta vídeos.
+                </video>
+              </div>
+            {% elif nome.lower().endswith(('.jpg', '.jpeg', '.png', '.gif', '.webp')) %}
+              <div class="media-container image-container">
+                 <!-- Link to open modal -->
+                <a href="#modal_{{ mes|lower }}_{{ loop.index }}">
+                  <img src="{{ file_path }}" alt="Foto de {{ mes }}" loading="lazy"> <!-- Added lazy loading -->
+                </a>
+              </div>
+            {% endif %}
+          {% endfor %}
+        </div>
+        {% if mes in poemas %}
+          <div class="poema">{{ poemas[mes] }}</div>
+        {% endif %}
       </div>
-      <div class="poema">{{ poemas[mes] }}</div>
-    </div>
+      {% endif %}
     {% endfor %}
   </div>
 
   <div class="navegacao">
-    <button onclick="mudarMes(-1)">⬅️ Mês anterior</button>
-    <button onclick="mudarMes(1)">Próximo mês ➡️</button>
+    <button id="prev-month">⬅️ Mês anterior</button>
+    <button id="next-month">Próximo mês ➡️</button>
   </div>
 
   <a href="/" class="botao-amor">Voltar para o começo 🏠</a>
 
-  {% for mes, arquivos in galeria.items() %}
-    {% for nome in arquivos %}
-      {% if not nome.endswith('.mp4') %}
-      <div id="modal_{{ mes|lower }}_{{ loop.index }}" class="modal">
-        <span class="fechar-modal" onclick="location.hash=''">&times;</span>
-        <img class="modal-content" src="{{ url_for('static', filename='img/' ~ mes|lower ~ '/' ~ nome) }}">
-      </div>
-      {% endif %}
-    {% endfor %}
+  <!-- Modals for Images -->
+  {% for mes in meses_ordenados %}
+    {% if mes in galeria %}
+      {% for nome in galeria[mes] %}
+        {% if nome.lower().endswith(('.jpg', '.jpeg', '.png', '.gif', '.webp')) %}
+        <div id="modal_{{ mes|lower }}_{{ loop.index }}" class="modal">
+          <span class="fechar-modal" onclick="location.hash=''">&times;</span>
+          <img class="modal-content" src="{{ url_for('static', filename='img/' ~ mes|lower ~ '/' ~ nome) }}" loading="lazy">
+        </div>
+        {% endif %}
+      {% endfor %}
+    {% endif %}
   {% endfor %}
 
-  <!-- Swiper JS -->
-<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  <!-- Floating Hearts Script -->
   <script>
-    const modals = document.querySelectorAll('.modal');
-    modals.forEach(modal => {
-      modal.addEventListener('click', function(event) {
-        if (event.target === this || event.target.classList.contains('fechar-modal')) {
-          this.style.display = 'none';
-        }
-      });
-    });
+    // Function to create and animate hearts
+    function createHearts() {
+      const container = document.body;
+      for (let i = 0; i < 15; i++) { // Reduced number slightly
+        const coracao = document.createElement("div");
+        coracao.className = "coracao";
+        coracao.style.left = Math.random() * 100 + "vw";
+        coracao.style.animationDuration = (5 + Math.random() * 5) + "s"; // Adjusted duration
+        coracao.style.animationDelay = Math.random() * 3 + "s"; // Added delay
+        container.appendChild(coracao);
 
-    window.addEventListener('hashchange', function() {
-      const hash = location.hash;
-      modals.forEach(modal => {
-        modal.style.display = modal.id === hash.substring(1) ? 'block' : 'none';
-      });
-    });
-  <script>
-    for (let i = 0; i < 20; i++) {
-      const coracao = document.createElement("div");
-      coracao.className = "coracao";
-      coracao.style.left = Math.random() * 100 + "vw";
-      coracao.style.animationDuration = (4 + Math.random() * 4) + "s";
-      document.body.appendChild(coracao);
+        // Remove heart after animation ends to prevent buildup
+        coracao.addEventListener('animationend', () => {
+          coracao.remove();
+        });
+      }
     }
+    // Create initial hearts
+    createHearts();
+    // Optionally create more hearts periodically
+    // setInterval(createHearts, 10000); // Example: add more every 10 seconds
   </script>
 
+  <!-- Gallery Navigation and Modal Script -->
   <script>
-    let indiceMes = 0;
-    const meses = document.querySelectorAll('.mes');
-    const nomesMeses = Object.keys({{ galeria|tojson }});
-
-    function mostrarMes(indice) {
-      meses.forEach(m => m.classList.remove('ativo'));
-      meses[indice].classList.add('ativo');
-      const indicador = document.getElementById("mes-indicador");
-      if (indicador) indicador.textContent = `📅 ${nomesMeses[indice]}`;
-    }
-
-    function mudarMes(direcao) {
-      indiceMes += direcao;
-      if (indiceMes < 0) indiceMes = meses.length - 1;
-      if (indiceMes >= meses.length) indiceMes = 0;
-      mostrarMes(indiceMes);
-    }
-
     document.addEventListener("DOMContentLoaded", function () {
-      mostrarMes(indiceMes);
+      let indiceMes = 0;
+      const mesesDivs = document.querySelectorAll('.linha-do-tempo .mes');
+      const nomesMeses = Array.from(mesesDivs).map(div => div.getAttribute('data-mes')); // Get month names from data attribute
+      const indicador = document.getElementById("mes-indicador");
+      const prevButton = document.getElementById('prev-month');
+      const nextButton = document.getElementById('next-month');
+      const backgroundMusic = document.getElementById('background-music');
+      const playPauseButton = document.getElementById('play-pause-button');
+
+      function mostrarMes(indice) {
+        mesesDivs.forEach((m, i) => {
+          if (i === indice) {
+            m.classList.add('ativo');
+          } else {
+            m.classList.remove('ativo');
+          }
+        });
+        if (indicador && nomesMeses.length > 0) {
+             indicador.textContent = `📅 ${nomesMeses[indice]}`;
+        }
+        // Optional: Scroll to the top of the month section
+        // if(mesesDivs[indice]) mesesDivs[indice].scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+
+      function mudarMes(direcao) {
+        if (nomesMeses.length === 0) return; // No months to navigate
+        indiceMes += direcao;
+        if (indiceMes < 0) indiceMes = nomesMeses.length - 1;
+        if (indiceMes >= nomesMeses.length) indiceMes = 0;
+        mostrarMes(indiceMes);
+      }
+
+      // Initial setup
+      if (nomesMeses.length > 0) {
+          mostrarMes(indiceMes);
+      } else {
+          if(indicador) indicador.textContent = "📅 Galeria Vazia";
+          if(prevButton) prevButton.style.display = 'none';
+          if(nextButton) nextButton.style.display = 'none';
+      }
+
+      // Event Listeners for Navigation
+      if(prevButton) prevButton.addEventListener('click', () => mudarMes(-1));
+      if(nextButton) nextButton.addEventListener('click', () => mudarMes(1));
+
+      // Modal Handling
+      const modals = document.querySelectorAll('.modal');
+      modals.forEach(modal => {
+        modal.addEventListener('click', function(event) {
+          // Close if clicking on the background or the close button
+          if (event.target === this || event.target.classList.contains('fechar-modal')) {
+            location.hash = ''; // Use hash change to close
+          }
+        });
+      });
+
+      // Handle modal display based on hash changes
+      function handleHashChange() {
+          const hash = location.hash;
+          let modalToShow = null;
+          modals.forEach(modal => {
+              if ('#' + modal.id === hash) {
+                  modalToShow = modal;
+              }
+              modal.style.display = 'none'; // Hide all modals initially
+          });
+          if (modalToShow) {
+              modalToShow.style.display = 'block'; // Show the target modal
+          }
+      }
+
+      window.addEventListener('hashchange', handleHashChange);
+      // Initial check in case the page loads with a hash
+      handleHashChange();
+
+      // Audio Control
+      if (playPauseButton && backgroundMusic) {
+        playPauseButton.addEventListener('click', () => {
+          if (backgroundMusic.paused) {
+            backgroundMusic.play();
+            playPauseButton.textContent = "⏸️"; // Pause symbol
+          } else {
+            backgroundMusic.pause();
+            playPauseButton.textContent = "▶️"; // Play symbol
+          }
+        });
+
+        // Update button text based on initial state (if autoplay works)
+         if (!backgroundMusic.paused) {
+             playPauseButton.textContent = "⏸️";
+         } else {
+             playPauseButton.textContent = "▶️";
+         }
+      }
+
     });
   </script>
+
+  <!-- Swiper JS (Consider removing if not using Swiper for the main gallery) -->
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  <!-- jQuery (Consider removing if not strictly needed) -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 </body>
 </html>
+
